@@ -1,0 +1,19 @@
+{
+    "name": "haloz\/weather",
+    "description": "A weather SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "haloz",
+            "email": "809219376@qq.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Haloz\\Weather\\": "src"
+        }
+    }
+}
