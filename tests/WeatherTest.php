@@ -3,9 +3,10 @@
 /*
  * This file is part of the haloz/weather.
  *
- * (c) haloz <809219376@qq.com>
+ * (c) haloz <i@809219376@qq.com>
  *
- * This source file is subject to the MIT license that is bundled.
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace Haloz\Weather\Tests;
@@ -29,9 +30,9 @@ class WeatherTest extends TestCase
 
         $client->allows()->get('https://restapi.amap.com/v3/weather/weatherInfo', [
             'query' => [
-                'key'        => 'mock-key',
-                'city'       => '深圳',
-                'output'     => 'json',
+                'key' => 'mock-key',
+                'city' => '深圳',
+                'output' => 'json',
                 'extensions' => 'base',
             ],
         ])->andReturn($response);
@@ -46,9 +47,9 @@ class WeatherTest extends TestCase
         $client = \Mockery::mock(Client::class);
         $client->allows()->get('https://restapi.amap.com/v3/weather/weatherInfo', [
             'query' => [
-                'key'        => 'mock-key',
-                'city'       => '深圳',
-                'output'     => 'xml',
+                'key' => 'mock-key',
+                'city' => '深圳',
+                'output' => 'xml',
                 'extensions' => 'all',
             ],
         ])->andReturn($response);

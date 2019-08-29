@@ -3,9 +3,10 @@
 /*
  * This file is part of the haloz/weather.
  *
- * (c) haloz <809219376@qq.com>
+ * (c) haloz <i@809219376@qq.com>
  *
- * This source file is subject to the MIT license that is bundled.
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace Haloz\Weather;
@@ -25,6 +26,7 @@ use Haloz\Weather\Exceptions\InvalidArgumentException;
 class Weather
 {
     protected $key;
+
     protected $guzzleOptions = [];
 
     public function __construct($key)
@@ -47,22 +49,22 @@ class Weather
         $url = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
         $types = [
-            'live'     => 'base',
+            'live' => 'base',
             'forecast' => 'all',
         ];
 
         if (!\in_array(\strtolower($format), ['xml', 'json'])) {
-            throw new InvalidArgumentException('Invalid response format: ' . $format);
+            throw new InvalidArgumentException('Invalid response format: '.$format);
         }
 
         if (!\array_key_exists(\strtolower($type), $types)) {
-            throw new InvalidArgumentException('Invalid type value(live/forecast): ' . $type);
+            throw new InvalidArgumentException('Invalid type value(live/forecast): '.$type);
         }
 
         $query = array_filter([
-            'key'        => $this->key,
-            'city'       => $city,
-            'output'     => \strtolower($format),
+            'key' => $this->key,
+            'city' => $city,
+            'output' => \strtolower($format),
             'extensions' => \strtolower($types[$type]),
         ]);
 
