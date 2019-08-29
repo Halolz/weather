@@ -8,8 +8,8 @@
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace Haloz\Weather\Exception;
+namespace Haloz\Weather\Exceptions;
 
-class Exception extends \Exception
+class HttpException extends Exception
 {
 }

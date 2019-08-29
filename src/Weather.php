@@ -19,8 +19,8 @@ namespace Haloz\Weather;
  */
 
 use GuzzleHttp\Client;
-use Haloz\Weather\Exception\HttpException;
-use Haloz\Weather\Exception\InvalidArgumentException;
+use Haloz\Weather\Exceptions\HttpException;
+use Haloz\Weather\Exceptions\InvalidArgumentException;
 
 class Weather
 {
@@ -42,23 +42,28 @@ class Weather
         $this->guzzleOptions = $options;
     }
 
-    public function getWeather($city, string $type = 'base', string $format = 'json')
+    public function getWeather($city, string $type = 'live', string $format = 'json')
     {
         $url = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
+        $types = [
+            'live'     => 'base',
+            'forecast' => 'all',
+        ];
+
         if (!\in_array(\strtolower($format), ['xml', 'json'])) {
-            throw new InvalidArgumentException('Invalid response format: '.$format);
+            throw new InvalidArgumentException('Invalid response format: ' . $format);
         }
 
-        if (!\in_array(\strtolower($type), ['base', 'all'])) {
-            throw new InvalidArgumentException('Invalid type value(base/all): '.$type);
+        if (!\array_key_exists(\strtolower($type), $types)) {
+            throw new InvalidArgumentException('Invalid type value(live/forecast): ' . $type);
         }
 
         $query = array_filter([
-            'key' => $this->key,
-            'city' => $city,
-            'output' => \strtolower($format),
-            'extensions' => \strtolower($type),
+            'key'        => $this->key,
+            'city'       => $city,
+            'output'     => \strtolower($format),
+            'extensions' => \strtolower($types[$type]),
         ]);
 
         try {
@@ -70,5 +75,15 @@ class Weather
         } catch (\Exception $e) {
             throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    public function getLiveWeather($city, $format = 'json')
+    {
+        return $this->getWeather($city, 'live', $format);
+    }
+
+    public function getForecastWeather($city, $format = 'json')
+    {
+        return $this->getWeather($city, 'forecast', $format);
     }
 }

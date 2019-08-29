@@ -2,18 +2,25 @@
     "name": "haloz\/weather",
     "description": "A weather SDK",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "haloz",
-            "email": "809219376@qq.com"
-        }
-    ],
+    "authors": [{
+        "name": "haloz",
+        "email": "809219376@qq.com"
+    }],
     "require": {
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "phpunit/phpunit": "^7.0",
+        "mockery/mockery": "^1.2"
     },
     "autoload": {
         "psr-4": {
             "Haloz\\Weather\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Haloz\\Weather\\ServiceProvider"
+            ]
         }
     }
 }
